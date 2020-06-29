@@ -3,9 +3,9 @@
         <li>
             <strong><%= event.name %></strong>
             in <%= event.location %>: 
-            <%= number_to_currency(event.price, precision: 0) %>
+            <%= price(event) %>
         </li>
-        <p><%= event.description %></p>
-        <p><%= event.starts_at %></p>
+        <p><%= truncate(event.description, length: 35, seperator: ' ') %></p>
+        <p><%= day_and_time(event) %></p>
     <% end %>
 </ul>
