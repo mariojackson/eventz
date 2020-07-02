@@ -3,7 +3,7 @@
 # EventsController provides actions for the event resource
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @events = Event.upcoming
   end
 
   def show
