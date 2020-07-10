@@ -13,6 +13,9 @@
         <p>
             <%= @event.description %>
         </p>
+        <div class="register">
+            <p><%= link_to 'Who is registered?', event_registrations_path(@event) %></p>
+        </div>
     </div>
 </section>
 
