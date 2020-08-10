@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :users
+  root 'events#index'
+
   resources :events do
     resources :registrations
   end
 
-  root 'events#index'
+  resources :users
+  get 'signup' => 'users#new'
 end
