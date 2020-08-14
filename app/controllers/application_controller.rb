@@ -13,8 +13,18 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_is_authorized?
 
+  def user_is_admin?
+    logged_in_user.admin?
+  end
+
+  helper_method :user_is_admin?
+
   def require_signin
     session[:intended_url] = request.url
     redirect_to new_session_url, alert: 'Please signin first!' unless logged_in_user
+  end
+
+  def require_admin
+    redirect_to events_url, alert: 'Unauthorized access!' unless user_is_admin?
   end
 end

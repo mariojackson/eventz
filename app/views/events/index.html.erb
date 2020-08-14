@@ -1,19 +1,21 @@
-    <% @events.each do |event| %>
-        <section class="event">
-            <div class="image">
-                <%= image_tag event.image_file_name %>
-            </div>
-            <div class="summary">
-                <h2><%= link_to event.name, event %></h2>
-                <h3><%= day_and_time(event) %> in <%= event.location %></h3>
-                <span class="price">
-                    <%= price(event) %>
-                </span>
-                <p><%= truncate(event.description, length: 35, seperator: ' ') %></p>
-            </div>
-        </section>
-    <% end %>
+<% @events.each do |event| %>
+  <section class="event">
+    <div class="image">
+      <%= image_tag event.image_file_name %>
+    </div>
+    <div class="summary">
+      <h2><%= link_to event.name, event %></h2>
+      <h3><%= day_and_time(event) %> in <%= event.location %></h3>
+      <span class="price">
+          <%= price(event) %>
+      </span>
+      <p><%= truncate(event.description, length: 35, seperator: ' ') %></p>
+    </div>
+  </section>
+<% end %>
 
-    <section class="admin">
-       <%= link_to "Add New Event", new_event_path, class: 'button' %>
-    </section>
+<% if user_is_admin? %>
+  <section class="admin">
+    <%= link_to "Add New Event", new_event_path, class: 'button' %>
+  </section>
+<% end %>

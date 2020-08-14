@@ -1,26 +1,28 @@
 <section class="event-details">
-    <div class="image">
-        <%= image_tag @event.image_file_name %>
+  <div class="image">
+    <%= image_tag @event.image_file_name %>
+  </div>
+  <div class="details">
+    <h1><%= @event.name %></h1>
+    <h2>
+      <%= pluralize(@event.capacity, "spot") %> &bull; <%= price(@event) %>
+    </h2>
+    <h3>
+      <%= day_and_time(@event) %> in <%= @event.location %>
+    </h3>
+    <p>
+      <%= @event.description %>
+    </p>
+    <div class="register">
+      <%= show_register_or_sold_out(@event) %>
+      <p><%= link_to 'Who is registered?', event_registrations_path(@event) %></p>
     </div>
-    <div class="details">
-        <h1><%= @event.name %></h1>
-        <h2>
-            <%= pluralize(@event.capacity, "spot") %> &bull; <%= price(@event) %>
-        </h2>
-        <h3>
-            <%= day_and_time(@event) %> in <%= @event.location %>
-        </h3>
-        <p>
-            <%= @event.description %>
-        </p>
-        <div class="register">
-            <%= show_register_or_sold_out(@event) %>
-            <p><%= link_to 'Who is registered?', event_registrations_path(@event) %></p>
-        </div>
-    </div>
+  </div>
 </section>
 
-<section class="admin">
+<% if user_is_admin? %>
+  <section class="admin">
     <%= link_to "Edit", edit_event_path(@event), class: "button" %>
     <%= link_to  "Delete", @event, class: "button", method: :delete, data: { confirm: "Really?" } %>
-</section>
+  </section>
+<% end %>
