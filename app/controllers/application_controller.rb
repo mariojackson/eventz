@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_is_authorized?
 
   def user_is_admin?
-    logged_in_user.admin?
+    logged_in_user&.admin?
   end
 
   helper_method :user_is_admin?
