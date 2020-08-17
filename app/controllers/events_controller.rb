@@ -4,7 +4,7 @@
 class EventsController < ApplicationController
   before_action :require_signin, except: [:index, :show]
   before_action :require_admin, except: [:index, :show]
-  
+
   def index
     @events = Event.upcoming
   end
@@ -12,6 +12,8 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @likers = @event.likers
+
+    @like = logged_in_user.likes.find_by(event_id: @event.id) if logged_in_user
   end
 
   def edit

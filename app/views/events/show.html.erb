@@ -1,7 +1,16 @@
 <section class="event-details">
   <div class="image">
     <%= image_tag @event.image_file_name %>
+    <% if logged_in_user %>
+      <div class="likes">
+        <%= like_or_unlike_button(@event, @like) %>
+        <div class="count">
+          <%= @likers.size %>
+        </div>
+      </div>
+    <% end %>
   </div>
+
   <div class="details">
     <h1><%= @event.name %></h1>
     <h2>
